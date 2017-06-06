@@ -1,12 +1,12 @@
 import struct
 from sklearn.cluster import MiniBatchKMeans
 
-def palettise(data):
+def palettise(data, n_entries=256):
 	height = len(data)
 	width = len(data[0])
 	all_colours = sum(data, [])
 	print("Calculating pallete...")
-	kmeans = MiniBatchKMeans(n_clusters=256, random_state=0).fit(all_colours)
+	kmeans = MiniBatchKMeans(n_clusters=n_entries, random_state=0).fit(all_colours)
 	pallete = [list(map(int, rgb)) for rgb in kmeans.cluster_centers_]
 	
 	print("Dithering...") # Floyd–Steinberg dithering
